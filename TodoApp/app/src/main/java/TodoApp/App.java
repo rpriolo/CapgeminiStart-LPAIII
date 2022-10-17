@@ -61,7 +61,7 @@ public class App {
 //        taskController.removeById(3);
 
 //        List<Task> tasks = taskController.getAll(2);
-//        System.out.println("Total de tarefas no projeto " + project.getName() + ": " + tasks.size());
+//        System.out.println("Total de tarefas no projeto: " + tasks.size());
 
     }
 }
