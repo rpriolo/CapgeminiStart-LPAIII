@@ -190,25 +190,29 @@ public class TaskDialogScreen extends javax.swing.JDialog {
     private void jLabelToolbarSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelToolbarSaveMouseClicked
         // TODO add your handling code here:
         try {
-            Task task = new Task();
-            
-            task.setIdProject(project.getId());
-            task.setName(jTextFieldName.getText());
-            task.setDescription(jTextAreaDescription.getText());
-            task.setNotes(jTextAreaNotes.getText());
-            task.setIsCompleted(false);
+            if (!jTextFieldName.getText().isEmpty() && !jFormattedTextFieldDeadline.getText().isEmpty()) {
+                Task task = new Task();
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // cria um formatador de datas
-            Date deadline = null; // cria a variável 'deadline' que receberá a data formatada
-            deadline = dateFormat.parse(jFormattedTextFieldDeadline.getText()); // converte o 'texto' do campo 'Prazo' (deadline) com o formatador de datas e atribui à variável
-            task.setDeadline(deadline); // define o atributo 'deadline' com o valor já formatado e transformado em tipo Date da variável 'deadline'
+                task.setIdProject(project.getId());
+                task.setName(jTextFieldName.getText());
+                task.setDescription(jTextAreaDescription.getText());
+                task.setNotes(jTextAreaNotes.getText());
+                task.setIsCompleted(false);
 
-            controller.save(task);
-            JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso!");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // cria um formatador de datas
+                Date deadline = null; // cria a variável 'deadline' que receberá a data formatada
+                deadline = dateFormat.parse(jFormattedTextFieldDeadline.getText()); // converte o 'texto' do campo 'Prazo' (deadline) com o formatador de datas e atribui à variável
+                task.setDeadline(deadline); // define o atributo 'deadline' com o valor já formatado e transformado em tipo Date da variável 'deadline'
+
+                controller.save(task);
+                JOptionPane.showMessageDialog(rootPane, "Tarefa salva com sucesso!");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Preencha todos os campos obrigatórios ('Nome' e 'Prazo') antes de salvar.");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
-        this.dispose();
     }//GEN-LAST:event_jLabelToolbarSaveMouseClicked
 
     /**
